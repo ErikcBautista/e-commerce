@@ -5,10 +5,18 @@ import {SectionProducts} from './sections/SectionProducts.js';
 import { useEffect, useState } from "react";
 import { getDepartmentService } from "../../../service/departmenstService.js";
 import { getProducts } from "../../../service/productsService.js";
+import ModalDefault from './modals/ModalDefault.js'
+import {useModal} from '../../../hooks/useModal.js';
 const Home = () => {
-  
+    const modal = useModal();
     const [departments,setDepartments] = useState([]);
     const [products,setProducts] = useState([]);
+    const openModal = () => modal.open(!modal.visible);
+    useEffect(
+      ()=>{
+          modal.open(false);
+      },[]
+  );
     useEffect(
         function(){
             getDepartmentService().then(r => setDepartments(r.data));
@@ -38,6 +46,7 @@ const Home = () => {
             <SlideDepartmentSection departments={departments}/>
             <SectionProducts products={products}/>
         </div>
+        <ModalDefault open={modal.visible} close={ openModal}/>
     </>
   );
 };

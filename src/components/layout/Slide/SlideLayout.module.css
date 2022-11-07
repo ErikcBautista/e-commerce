@@ -1,5 +1,4 @@
 .content{
     min-height: 9rem;
-    border: 1px solid black;
     overflow: scroll;
 }

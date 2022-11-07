@@ -1,11 +1,12 @@
 import SlideLayoutStyle from './SlideLayout.module.css'
-const SlideLayout = ({children}) => {
+const SlideLayout = ({title='',children}) => {
     return (
         <>
+        <div className={`font-mono text-2xl bg-gray-600 text-white px-10`}>{title}</div>
         <div className={`
-        bg-gray-500
+        text-white
         flex flex-nowrap 
-        rounded-lg 
+        justify-center
         px-10 py-5
         ${SlideLayoutStyle.content} `}>
             {children}

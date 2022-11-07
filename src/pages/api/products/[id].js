@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const products =  async(req, res) => {
     switch (req.method) {
         case 'GET':
-            const product = await prisma.products.findUnique({
+            const product = await prisma.product.findUnique({
                 where :{
                     idProduct : parseInt(req.query.id)
                 }
@@ -16,7 +16,7 @@ const products =  async(req, res) => {
             break;
         case 'DELETE':
             prisma.$connect();
-            const productFind = await prisma.products.findUnique({
+            const productFind = await prisma.product.findUnique({
                 where :{
                     idProduct : parseInt(req.query.id)
                 }
@@ -24,7 +24,7 @@ const products =  async(req, res) => {
             if(!productFind){
                 return res.status(404).json({message:'Product not found'})
             }
-            await prisma.products.delete({
+            await prisma.product.delete({
                 where : {
                     idProduct : parseInt(req.query.id)
                 }

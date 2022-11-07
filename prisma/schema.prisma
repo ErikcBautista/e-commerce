@@ -14,12 +14,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Products{
-  idProduct Int @id @default(autoincrement())
-  name String 
-  description String 
-  stack Int
-  price Float
+model Department {
+  id      Int      @id @default(autoincrement())
+  name    String
+  Product Product?
+}
+
+model Product {
+  idProduct    Int        @id @default(autoincrement())
+  name         String
+  description  String
+  stack        Int
+  price        Float
+  department   Department @relation(fields: [departmentId], references: [id])
+  departmentId Int        @unique
 }
 
 // Necessary for Next auth

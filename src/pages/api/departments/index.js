@@ -11,36 +11,33 @@ const postProduct = ({name,price,description,stack}) => {
 const getProducts = () => {
 
 }
-const products = async (req, res) =>{
+const departments = async (req, res) =>{
     switch (req.method) {
         case 'POST':
             prisma.$connect();
-            await prisma.product.create({
+            await prisma.department.create({
                 data: {
-                    name : req.body.name,
-                    price : parseFloat(req.body.price),
-                    stack : parseInt(req.body.stack),
-                    description : req.body.description
+                    name : req.body.name
                 } 
             }
             )
             prisma.$disconnect()
-            return res.status(200).json({data:{name:'hola'}})
+            return res.status(200).json({data:{name:'Department created'}})
             break;
         case 'GET':
-            let products = null;
+            let departments = null;
             if(req.query.name){
-                products = await prisma.product.findMany({
+                departments = await prisma.department.findMany({
                     where : {
                         name : {
                             contains : req.query.name
                         }
                     }
                 })
-                return res.status(200).json({data:products,message:'Successful request'});
+                return res.status(200).json({data:departments,message:'Successful request'});
             }
-            products = await prisma.product.findMany();
-            return res.status(200).json({data:products,message:'Successful request'});
+            departments = await prisma.department.findMany();
+            return res.status(200).json({data:departments,message:'Successful request departments'});
             break;
         default:
             break;
@@ -48,4 +45,4 @@ const products = async (req, res) =>{
     return res.status(200).json({data:{name:'hola'}})
 }
 
-export default products;
+export default departments;

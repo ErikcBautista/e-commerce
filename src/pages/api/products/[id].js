@@ -34,7 +34,7 @@ const products =  async(req, res) => {
         case 'PUT':
             const departmentUpdate = await prisma.product.update({
                 where : {
-                    id : parseInt(req.query.id)
+                    idProduct : parseInt(req.query.id)
                 },
                 data: {
                     name: req.body.name,

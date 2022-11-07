@@ -2,12 +2,19 @@ import Link from "next/link";
 import NavLayout from "../../layout/Nav/NavLayout.js";
 import {SlideDepartmentSection} from './sections/SlideDepartments.js'
 import {SectionProducts} from './sections/SectionProducts.js';
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { getDepartmentService } from "../../../service/departmenstService.js";
 import { getProducts } from "../../../service/productsService.js";
 import ModalDefault from './modals/ModalDefault.js'
 import {useModal} from '../../../hooks/useModal.js';
+import {reducerProducts} from '../../../hooks/reducerProducts.js';
+const sectionsContext = createContext({
+  products : [],
+  departments : []
+})
+
 const Home = () => {
+  
     const modal = useModal();
     const [departments,setDepartments] = useState([]);
     const [products,setProducts] = useState([]);
@@ -24,9 +31,10 @@ const Home = () => {
     )
     useEffect(
       function(){
-          getProducts().then(r => setProducts(r.data));
-      },[]
+          getProducts().then(r => dispatch({type : 'search',payload:r.data}));
+      },0
   )
+  const [p,dispatch] = useReducer(reducerProducts,products)
   return (
     <>
       <NavLayout
@@ -44,7 +52,7 @@ const Home = () => {
       />
         <div className="container mx-auto max-w-screen-2Xl">
             <SlideDepartmentSection departments={departments}/>
-            <SectionProducts products={products}/>
+            <SectionProducts products={p}/>
         </div>
         <ModalDefault open={modal.visible} close={ openModal}/>
     </>

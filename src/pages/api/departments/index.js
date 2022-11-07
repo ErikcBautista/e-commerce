@@ -22,7 +22,7 @@ const departments = async (req, res) =>{
             }
             )
             prisma.$disconnect()
-            return res.status(200).json({data:{name:'Department created'}})
+            return res.status(200).json({message:'Department created'})
             break;
         case 'GET':
             let departments = null;

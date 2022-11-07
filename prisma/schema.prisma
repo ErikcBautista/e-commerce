@@ -15,9 +15,9 @@ datasource db {
 }
 
 model Department {
-  id      Int      @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   name    String
-  Product Product?
+  Product Product[]
 }
 
 model Product {
@@ -27,7 +27,7 @@ model Product {
   stack        Int
   price        Float
   department   Department @relation(fields: [departmentId], references: [id])
-  departmentId Int        @unique
+  departmentId Int
 }
 
 // Necessary for Next auth

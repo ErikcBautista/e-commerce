@@ -58,9 +58,6 @@ CREATE TABLE "VerificationToken" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Product_departmentId_key" ON "Product"("departmentId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
 -- CreateIndex

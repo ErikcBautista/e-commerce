@@ -31,7 +31,22 @@ const products =  async(req, res) => {
             })
             prisma.$disconnect()
             return res.status(204).end();
-        
+        case 'PUT':
+            const departmentUpdate = await prisma.product.update({
+                where : {
+                    id : parseInt(req.query.id)
+                },
+                data: {
+                    name: req.body.name,
+                    price: parseFloat(req.body.price),
+                    stack: parseInt(req.body.stack),
+                    description: req.body.description,
+                    departmentId: parseInt(req.body.departmentId),
+                }
+            })
+            return res.status(200).json({
+                data : departmentUpdate,message: 'Department is updated'
+            });
         default:
             break;
     }

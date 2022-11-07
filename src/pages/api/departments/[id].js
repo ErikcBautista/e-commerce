@@ -31,7 +31,18 @@ const department =  async(req, res) => {
             })
             prisma.$disconnect()
             return res.status(204).end();
-        
+        case 'PUT':
+            const departmentUpdate = await prisma.department.update({
+                where : {
+                    id : parseInt(req.query.id)
+                },
+                data: {
+                    name : req.body.name
+                }
+            })
+            return res.status(200).json({
+                data : departmentUpdate,message: 'Department is updated'
+            });
         default:
             break;
     }

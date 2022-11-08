@@ -7,7 +7,14 @@ const products =  async(req, res) => {
             const product = await prisma.product.findUnique({
                 where :{
                     idProduct : parseInt(req.query.id)
-                }
+                },
+                include: {
+                    department: {
+                      select: {
+                        name: true,
+                      },
+                    },
+                  },
             })
             if(!product){
                 return res.status(404).json({message:'Product not found'})

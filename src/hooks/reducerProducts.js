@@ -1,6 +1,5 @@
 
 const reducerProducts = (state , action) => {
-    console.log(action)
     switch (action.type) {
         case 'search':
           return action.payload;

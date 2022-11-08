@@ -1,4 +1,4 @@
-for this test is necesary execute the next petition on opstman
+for this test is necesary execute the next petition on postman
 
 server = http://localhost:3000/
 

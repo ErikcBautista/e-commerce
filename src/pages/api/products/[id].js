@@ -56,7 +56,6 @@ const products =  async(req, res) => {
                     departmentId: parseInt(req.body.departmentId ?? productFinded.departmentId),
                 }
             })
-            console.log(updateProduct)
             return res.status(200).json({
                 data : updateProduct,message: 'Product is updated'
             });

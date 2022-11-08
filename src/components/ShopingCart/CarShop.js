@@ -3,7 +3,7 @@ import CarShopLayout from "../layout/CarShop/CarShopLayout"
 import carShopping from './images/shopping-cart.png';
 import CarShopStyle from './CarShop.module.css'
 import { useState } from "react";
-const CarShop = ({shopProduct=[]}) => {
+const CarShop = ({shopProduct=[],generateBoughtEvent}) => {
     let total = 0;
     shopProduct.forEach(
         e => {
@@ -32,7 +32,7 @@ const CarShop = ({shopProduct=[]}) => {
                     shopProduct.length > 0 
                     ? <div>
                         <div>total: ${total}</div>
-                        <button className="rounded-lg bg-blue-700 text-white">comprar</button>
+                        <button onClick={generateBoughtEvent} className="rounded-lg bg-blue-700 text-white">comprar</button>
                     </div>
                     :null
                 }

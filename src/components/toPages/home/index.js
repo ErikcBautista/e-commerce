@@ -13,6 +13,8 @@ import {reducerShopProducts, shoppingCartInitial} from '../../../hooks/reducerPr
 import SectionLayout from "../../layout/Section/SectionLayout.js";
 import { CardAmount } from "../../card/CardAmount.js";
 import { getProducts } from "../../../service/productsService.js";
+import { boughtProductsService } from '../../../service/boughtProductsService.js'
+
 const sectionsContext = createContext({
   products : [],
   departments : []
@@ -40,6 +42,20 @@ const Home = () => {
           modalNewProduct.open(false);
       },[]
   );
+  const [stateProducts , disProduct] = useReducer(reducerShopProducts,shoppingCartInitial)
+    const {products} = stateProducts;
+  const generateBought = () => {
+    if(products.length > 0)
+    {
+      products.forEach(
+        e => {
+          boughtProductsService(null,'POST',{productId:e.idProduct}).then(
+            r => console.log(r)
+          )
+        }
+      );
+    }
+  }
     const openModal = () => modal.open(!modal.visible);
     const openModalNewProduct = () => modalNewProduct.open(!modalNewProduct.visible)
   
@@ -49,8 +65,7 @@ const Home = () => {
     const [sendNewProduct , setSendNewProduct] = useState(newProduct)
     const [optionDepartmentSelected, setOptionDepartmentSelected] = useState('')
 
-    const [stateProducts , disProduct] = useReducer(reducerShopProducts,shoppingCartInitial)
-    const {products} = stateProducts;
+    
     const addProduct = (e) => {
       disProduct({type:'add',payload:e})
     };
@@ -115,14 +130,14 @@ const Home = () => {
               <Link href={"/"}>Home</Link>
             </div>
             <div className={`px-8`}>
-              <Link href={"/homePage"}>home</Link>
+              <Link href={"/bought-products"}>Compras realizadas</Link>
             </div>
           </>
         }
       />
       
         <div className="container mx-auto max-w-screen-2Xl  relative">
-            <CarShop shopProduct={products} />
+            <CarShop generateBoughtEvent={generateBought} shopProduct={products} />
             <SlideDepartmentSection departments={departments}/>
             <div className="flex justify-center">
               <button onClick={openModalNewProduct } className="bg-blue-700 text-white p-4 rounded-lg w-96">Nuevo producto</button>

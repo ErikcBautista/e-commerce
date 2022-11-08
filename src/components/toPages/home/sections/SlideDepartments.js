@@ -12,13 +12,17 @@ const SlideDepartmentSection = ({departments=[]}) => {
             departments.length > 0
             ? <SlideLayout title='Departamentos'
             children={
-                departments.map(
+                <>
+                <CardText text={"+"} />
+                {departments.map(
                     e => {
                         return (
                             <CardText text={e.name} />
                         )
                     }
                 )}
+                </>
+            }
             />
             :null
         }

@@ -3,14 +3,8 @@ import { useEffect, useState } from 'react';
 import {getProducts} from '../../../../service/productsService.js'
 import {CardAmount} from '../../../card/CardAmount.js'
 import SectionLayout from '../../../layout/Section/SectionLayout.js'
-const SectionProducts = ({products=[]}) => {
-    
-    // const [products , setProducts] = useState([]);
-    // useEffect(
-    //     function() {
-    //         getProducts().then(r => setProducts(r.data))
-    //     },[]
-    // )
+const eventDefault = () => console.log((''))
+const SectionProducts = ({products=[],eventAddProductCar,eventInfo}) => {
     return(
         <>
         {
@@ -21,7 +15,7 @@ const SectionProducts = ({products=[]}) => {
                 products.map(
                     e => {
                         return (
-                            <CardAmount text={e.name} amount={`$ ${e.price}`}/>
+                            <CardAmount eventInfo={eventInfo} eventAdd={ eventAddProductCar} data={e} text={e.name} amount={`$ ${e.price}`}/>
                         )
                     }
                 )

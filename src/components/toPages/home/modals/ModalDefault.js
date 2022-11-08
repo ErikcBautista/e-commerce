@@ -2,15 +2,15 @@
 import LayoutModal from "../../../Modal/Modal.js";
 import ModalDefaultStyle from './ModalDefaultStyle.module.css';
 
-const Footer = () => (
+const Footer = ({footer=''}) => (
     <div className={ModalDefaultStyle.modalFooter}>
-        footer
+        {footer}
     </div>
 )
 
-const Content = () => (
+const Content = ({content=''}) => (
     <div className={ModalDefaultStyle.modalContent}>
-        content
+        {content}
     </div>
 )
 
@@ -25,17 +25,23 @@ const Header = ({headerTitle = 'Modal Title',headerAction='X',eventAction}) => (
     </div>
 );
 
-const Modal = ({close}) => (
+const Modal = ({close,headerTitle,content,footer}) => (
     <div className={ModalDefaultStyle.modal}>
-        <Header eventAction={close}/>
-        <Content/>
-        <Footer/>
+        <Header headerTitle={headerTitle} eventAction={close}/>
+        <Content content={content}/>
+        <Footer footer={footer}/>
     </div>
 )
 
-const ModalDefault = ({open,close}) => {
+const ModalDefault = ({open,close,headerTitle,content,footer}) => {
     return (
-        open && <LayoutModal children={<Modal close={close}/>}/>
+        open && <LayoutModal children={
+            <Modal close={close}
+                headerTitle={headerTitle}
+                content={content}
+                footer={footer}
+            />
+        }/>
     )
 }
 

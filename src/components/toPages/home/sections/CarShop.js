@@ -1,6 +1,0 @@
-
-const CarShop = () => {
-    return (
-        <></>
-    )
-}

@@ -3,8 +3,6 @@
     width: 500px;
     min-height: 150px;
     background: #fff;
-    font-family: var(--font-molengo);
-    font-size: var(--font-text);
 }
 
 .ModalHeader{

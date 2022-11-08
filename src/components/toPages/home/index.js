@@ -109,8 +109,8 @@ const Home = () => {
     }
     // openModal()
   }
-  const getInfoProduct = (id) => {
-    getProducts(id).then(r => {
+  const getInfoProduct = (data) => {
+    getProducts(data.idProduct).then(r => {
       responseDataOnlyProduct(r.data)
     })
   }

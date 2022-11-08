@@ -11,7 +11,7 @@ const CardAmount = ({text='this is text',amount = '$',eventAdd,eventInfo,data}) 
                 <div className='grid grid-cols-2'>
                     {
                         eventInfo 
-                        ? <button onClick={() => eventInfo(data.idProduct)} className={`rounded-l-lg bg-neutral-400`} >info</button>
+                        ? <button onClick={() => eventInfo(data)} className={`rounded-l-lg bg-neutral-400`} >info</button>
                         : null
                     }
                     {

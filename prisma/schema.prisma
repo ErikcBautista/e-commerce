@@ -21,13 +21,21 @@ model Department {
 }
 
 model Product {
-  idProduct    Int        @id @default(autoincrement())
-  name         String
-  description  String
-  stack        Int
-  price        Float
-  department   Department @relation(fields: [departmentId], references: [id])
-  departmentId Int
+  idProduct      Int              @id @default(autoincrement())
+  name           String
+  description    String
+  stack          Int
+  price          Float
+  department     Department       @relation(fields: [departmentId], references: [id])
+  departmentId   Int
+  BoughtProducts BoughtProducts[]
+}
+
+model BoughtProducts {
+  id        Int     @id @default(autoincrement())
+  user      String
+  product   Product @relation(fields: [productId], references: [idProduct])
+  productId Int
 }
 
 // Necessary for Next auth

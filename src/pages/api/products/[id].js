@@ -39,20 +39,26 @@ const products =  async(req, res) => {
             prisma.$disconnect()
             return res.status(204).end();
         case 'PUT':
-            const departmentUpdate = await prisma.product.update({
+            const productFinded = await prisma.product.findFirst({
                 where : {
                     idProduct : parseInt(req.query.id)
-                },
-                data: {
-                    name: req.body.name,
-                    price: parseFloat(req.body.price),
-                    stack: parseInt(req.body.stack),
-                    description: req.body.description,
-                    departmentId: parseInt(req.body.departmentId),
                 }
             })
+            const updateProduct = await prisma.product.update({
+                where:{
+                    idProduct: productFinded.idProduct
+                },
+                data : {
+                    name: req.body.name ?? productFinded.name,
+                    price: parseFloat(req.body.price ?? productFinded.price),
+                    stack: parseInt(req.body.stack ?? productFinded.stack),
+                    description: req.body.description ?? productFinded.description,
+                    departmentId: parseInt(req.body.departmentId ?? productFinded.departmentId),
+                }
+            })
+            console.log(updateProduct)
             return res.status(200).json({
-                data : departmentUpdate,message: 'Department is updated'
+                data : updateProduct,message: 'Product is updated'
             });
         default:
             break;

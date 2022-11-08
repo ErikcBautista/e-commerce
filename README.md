@@ -2,7 +2,8 @@ for this test is necesary execute the next petition on opstman
 
 server = http://localhost:3000/
 
-endpoint = server + departments
+endpoint = server + api/departments
+
 method = 'POST'
 body = {
     "name" : "Department default"
